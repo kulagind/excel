@@ -40,6 +40,33 @@ class Dom {
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback);
   }
+
+  closest(selector) {
+    return $(this.$el.closest(selector));
+  }
+
+  getCoords() {
+    return this.$el.getBoundingClientRect();
+  }
+
+  getChildrenBySelector(selector) {
+    const children = this.$el.querySelectorAll(selector);
+    const $children = [];
+    children.forEach((el) => {
+      $children.push($(el));
+    });
+    return $children;
+  }
+
+  get data() {
+    return this.$el.dataset;
+  }
+
+  css(styles = {}) {
+    Object.keys(styles).forEach((key) => {
+      this.$el.style[key] = styles[key];
+    });
+  }
 }
 
 export function $(selector) {

@@ -7,19 +7,16 @@ export function createTable(rowsCount = 33) {
   const colsCount = CODES.Z - CODES.A + 1;
   const rows = [];
 
-  const headerCols = new Array(colsCount)
-      .fill('')
-      .map(toHeaderCol)
-      .join('');
+  const headerCols = new Array(colsCount).fill('').map(toHeaderCol).join('');
 
   rows.push(createRow(headerCols));
 
-  const emptyRow = new Array(colsCount)
-      .fill('')
-      .map(createCell)
-      .join('');
-
   for (let i = 0; i < rowsCount; i++) {
+    const emptyRow = new Array(colsCount)
+        .fill('')
+        .map(createCell(i))
+        .join('');
+
     rows.push(createRow(emptyRow, i + 1));
   }
 
@@ -56,9 +53,17 @@ function createCol(el, index) {
   `;
 }
 
-function createCell(_, col) {
-  return `
-    <div class="cell" contenteditable data-col="${col}">
-    </div>
-  `;
+function createCell(row) {
+  return (_, col) => {
+    return `
+      <div 
+        class="cell" 
+        contenteditable
+        data-col="${col}"
+        data-id="${row}:${col}">
+      </div>
+    `;
+  };
 }
+
+

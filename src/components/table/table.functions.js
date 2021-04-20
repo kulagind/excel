@@ -47,3 +47,7 @@ export function nextSelector(key, { col, row }) {
 
   return `[data-id="${row}:${col}"]`;
 }
+
+export function camelToKebab(text) {
+  return text.replace(/([a-z0-9]|(?=[A-Z]))([A-Z])/g, '$1-$2').toLowerCase();
+}

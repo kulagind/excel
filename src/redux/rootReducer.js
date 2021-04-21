@@ -4,6 +4,7 @@ import {
   CHANGE_TITLE,
   CHANGE_STYLE,
   APPLY_STYLE,
+  UPDATE_DATE
 } from './types';
 
 export function rootReducer(state, action) {
@@ -40,6 +41,11 @@ export function rootReducer(state, action) {
       return {
         ...state,
         title: action.payload
+      };
+    case UPDATE_DATE:
+      return {
+        ...state,
+        createdAt: new Date().toJSON()
       };
     default:
       return state;
